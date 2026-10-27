@@ -83,7 +83,7 @@ button:active {
     background: white;
     border-radius: 10px;
     overflow: hidden;
-    border: 1px solid #8ACE00;
+    border: 1px solid black;
     box-shadow: 0 4px 12px #000;
 }
 
@@ -112,7 +112,7 @@ button:active {
 
 .preco {
     display: block;
-    color: #8ACE00;
+    color: #abab06;
     font-size: 20px;
     margin-top: 16px
 }

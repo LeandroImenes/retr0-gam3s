@@ -14,17 +14,17 @@ btnCancelar.addEventListener("click", ()=>{
 form.addEventListener("submit", (evento)=>{
     evento.preventDefault()
     const jogo = document.getElementById("jogo").value.trim()
-    const descricao = document.getElementById("descricao").value.trim
+    const descricao = document.getElementById("descricao").value.trim()
     const desenvolvedora = document.getElementById("desenvolvedora").value.trim()
     const genero = document.getElementById("genero").value.trim()
     const imagem = document.getElementById("imagem").value.trim()
     const preco = Number(document.getElementById("preco").value)
    
-    criarCard(jogo,desenvolvedora,genero,imagem,preco)
+    criarCard(jogo,descricao,desenvolvedora,genero,imagem,preco)
     form.reset()
     modal.close()
 })
-function criarCard(jogo, desenvolvedora, genero, imagem, preco){
+function criarCard(jogo, descricao, desenvolvedora, genero, imagem, preco){
     mensagemVazia.hidden = true;
 
     const card = document.createElement("article")
@@ -47,7 +47,7 @@ function criarCard(jogo, desenvolvedora, genero, imagem, preco){
     const valor = document.createElement("strong")
     valor.classList.add("preco")
     valor.textContent = preco.toLocaleString("pt-BR", {style:"currency", currency:"BRL"})
-    info.append(titulo, nomeDesenvolvedora,nomeGenero,valor)
+    info.append(titulo, textoDescricao, nomeDesenvolvedora,nomeGenero,valor)
     card.append(capa,info)
     lista.appendChild(card)
 }
