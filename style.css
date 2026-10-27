@@ -170,12 +170,8 @@ button.cancelar:hover {
     object-fit: cover;
     display: block;
 }
-.imagens{
+
+.imagens {
     display: flex;
     justify-content: space-between;
-}
-#triforce{
-    width: 150px;
-    display: flex;
-    align-items: flex-start;
 }
