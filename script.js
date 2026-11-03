@@ -3,7 +3,7 @@ const API_URL = "http://localhost:3000"
 const btnCadastrar = document.getElementById("btnCadastrar")
 const btnCancelar = document.getElementById("btnCancelar")
 const modal = document.getElementById("modalCadastro")
-const form = document.getElementById("formJogo")
+const form = document.getElementById("formJogos")
 const lista = document.getElementById("listarJogos")
 const mensagemVazia = document.getElementById("mensagemVazia")
 
@@ -30,7 +30,7 @@ async function carregarJogos(){
 
         mensagemVazia.hidden = true
         jogos.forEach(jogo => {
-            criarCard(jogo.nome, jogo.descricao, jogo.desenvolvedora, jogo.genero, jogo.imagem, jogo.preco)
+            criarCard(jogo.nome, jogo.desenvolvedora, jogo.genero, jogo.imagem, jogo.preco)
         })
     }catch (erro){
         console.error("Erro ao carregar jogos: ", erro)
@@ -38,7 +38,7 @@ async function carregarJogos(){
     }
 }
 
-function criarCard(nome, descricao, desenvolvedora, genero, imagem, preco){
+function criarCard(nome, desenvolvedora, genero, imagem, preco){
     mensagemVazia.hidden = true;
 
     const card = document.createElement("article")
@@ -57,9 +57,6 @@ function criarCard(nome, descricao, desenvolvedora, genero, imagem, preco){
     const titulo = document.createElement("h3")
     titulo.textContent = nome
 
-    const textoDescricao = document.createElement("p")
-    textoDescricao.textContent = "Descrição: " + descricao
-
     const nomeDesenvolvedora = document.createElement("p")
     nomeDesenvolvedora.textContent = "Desenvolvedora: " + desenvolvedora
 
@@ -70,7 +67,7 @@ function criarCard(nome, descricao, desenvolvedora, genero, imagem, preco){
     valor.classList.add("preco")
     valor.textContent = preco.toLocaleString("pt-BR", {style:"currency", currency:"BRL"})
 
-    info.append(titulo, textoDescricao, nomeDesenvolvedora,nomeGenero,valor)
+    info.append(titulo, nomeDesenvolvedora,nomeGenero,valor)
     card.append(capa,info)
     lista.appendChild(card)
 }

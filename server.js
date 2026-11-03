@@ -19,7 +19,7 @@ db.connect((erro) => {
 })
 
 const mostrarJogos = (req, res) => {
-    const sql = "SELECT id, nome, descricao, desenvolvedora, genero, imagem, preco FROM jogos"
+    const sql = "SELECT id, nome, desenvolvedora, genero, imagem, preco FROM jogos"
     db.query(sql, (erro, resultados) => {
         if (erro) {
             return res.status(500).send("Erro ao consultar o DB")
@@ -29,10 +29,10 @@ const mostrarJogos = (req, res) => {
 }
 
 const novoJogo = (req, res) => {
-    const { nome, descricao, desenvolvedora, genero, imagem, preco } = req.body
-    if (nome && descricao && desenvolvedora && genero && imagem && preco) {
-        const sql = "INSERT INTO jogos (nome, descricao, desenvolvedora, genero, imagem, preco) VALUES (?, ?, ?, ?, ?, ?)"
-        const valores = [nome, descricao, desenvolvedora, genero, imagem, preco]
+    const { nome, desenvolvedora, genero, imagem, preco } = req.body
+    if (nome && desenvolvedora && genero && imagem && preco) {
+        const sql = "INSERT INTO jogos (nome, desenvolvedora, genero, imagem, preco) VALUES (?, ?, ?, ?, ?)"
+        const valores = [nome, desenvolvedora, genero, imagem, preco]
 
         db.query(sql, valores, (erro, resultado) => {
             if (erro) {

@@ -180,3 +180,11 @@ dialog h1{
     font-size: 50px;
     margin-right: 150px;
 }
+
+footer{
+    background-color: rgb(247, 222, 39);
+}
+footer p{
+    display: flex;
+    justify-content: center;
+}
