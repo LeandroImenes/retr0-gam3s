@@ -6,8 +6,9 @@ create table jogos(
     nome varchar (50) not null,
     desenvolvedora varchar (50) not null,
     genero varchar (50) not null,
-    imagem text (500) not null,
-    preco decimal(10,2) not null
+    imagem varchar (500) not null,
+    preco decimal(10,2) not null,
+    data_cadastro datetime default current_timestamp
 );
 
 describe jogos;

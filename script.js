@@ -3,15 +3,16 @@ const API_URL = "http://localhost:3000"
 const btnCadastrar = document.getElementById("btnCadastrar")
 const btnCancelar = document.getElementById("btnCancelar")
 const modal = document.getElementById("modalCadastro")
-const form = document.getElementById("formJogos")
+const form = document.getElementById("formJogo")
 const lista = document.getElementById("listarJogos")
 const mensagemVazia = document.getElementById("mensagemVazia")
 
-btnCadastrar.addEventListener("click", ()=>{
+btnCadastrar.addEventListener("click", () => {
     modal.showModal()
 })
 
-btnCancelar.addEventListener("click", ()=>{
+btnCancelar.addEventListener("click", () => {
+    form.reset()
     modal.close()
 })
 
@@ -23,7 +24,7 @@ async function carregarJogos(){
         lista.innerHTML=""
 
         if(jogos.length == 0){
-            mensagemVazia.hidden=false
+            mensagemVazia.hidden = false
             lista.appendChild(mensagemVazia)
             return
         }
@@ -37,6 +38,41 @@ async function carregarJogos(){
         alert("Não foi possível conectar ao servidor")  
     }
 }
+
+form.addEventListener("submit", async (evento) => {
+    evento.preventDefault()
+
+    const novoJogo = {
+        nome: document.getElementById("nome").value.trim(),
+        desenvolvedora: document.getElementById("desenvolvedora").value.trim(),
+        genero: document.getElementById("genero").value.trim(),
+        imagem: document.getElementById("imagem").value.trim(),
+        preco: Number(document.getElementById("preco").value)
+    }
+
+    try {
+        const resposta = await fetch(API_URL + '/cadastrar', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(novoJogo)
+        })
+
+        if (resposta.ok) {
+            form.reset()
+            modal.close()
+            carregarJogos()
+        } else {
+            alert("Erro ao salvar jogo. Verifique BD")
+        }
+    } catch {
+        console.error("Erro na requisição:")
+        alert("Erro de conexão com o servidor")
+    }
+
+})
+
 
 function criarCard(nome, desenvolvedora, genero, imagem, preco){
     mensagemVazia.hidden = true;
@@ -65,7 +101,7 @@ function criarCard(nome, desenvolvedora, genero, imagem, preco){
 
     const valor = document.createElement("strong")
     valor.classList.add("preco")
-    valor.textContent = preco.toLocaleString("pt-BR", {style:"currency", currency:"BRL"})
+    valor.textContent = Number(preco).toLocaleString("pt-BR", {style:"currency", currency:"BRL"})
 
     info.append(titulo, nomeDesenvolvedora,nomeGenero,valor)
     card.append(capa,info)
