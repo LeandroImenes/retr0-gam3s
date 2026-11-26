@@ -51,9 +51,8 @@ button {
     color: black;
     font-weight: bold;
     cursor: pointer;
-    cursor: pointer;
     transition: transform 0.3s ease;
-    margin-top: 45px;
+    margin-top: 45px; /*deixa a distancia certa dentro do info-jogos, mas também deixa o botão cadastrar jogo colado no card*/
 }
 
 button:hover {
@@ -66,7 +65,6 @@ button:active {
 
 .listar-jogos {
     display: flex;
-    align-items: flex-start;
     flex-wrap: wrap;
     gap: 80px;
 }
@@ -80,28 +78,39 @@ button:active {
 }
 
 .card-jogo {
+    display: flex;
+    flex-direction: column;
     background: white;
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid black;
-    box-shadow: 0 4px 12px #000;
+    box-shadow: 0 4px 12px #9a9001;
+    width: 380px;
+    height: 440px;
 }
 
 .capa {
-    height: 170px;
+    width: 100%;
+    height: 200px;
     background: #2929;
     color: #f5f1e8;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 .info-jogo {
     padding: 18px;
+    display: flex;
+    flex-direction: column;
+    height: calc(440px-200px);
+    box-sizing: border-box;
 }
 
 .info-jogo h3 {
     margin-bottom: 8px;
+    font-size: 30px;
 }
 
 .info-jogo p {
@@ -187,4 +196,15 @@ footer{
 footer p{
     display: flex;
     justify-content: center;
+}
+.acoes-card button{
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 13px;
+}
+
+.acoes-card{
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
 }

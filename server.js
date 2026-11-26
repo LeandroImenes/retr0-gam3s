@@ -27,7 +27,6 @@ const mostrarJogos = (req, res) => {
         res.send(resultados)
     })
 }
-
 const novoJogo = (req, res) => {
     const { nome, desenvolvedora, genero, imagem, preco } = req.body
     if (nome && desenvolvedora && genero && imagem && preco) {
@@ -45,6 +44,38 @@ const novoJogo = (req, res) => {
     }
 }
 
+const atualizarJogo = (req, res)=>{
+    const {id} = req.params
+    const {nome, desenvolvedora, genero, imagem, preco} = req.body
+
+    if(nome && desenvolvedora && genero && imagem && preco){
+        const sql = "UPDATE jogos SET nome = ?, desenvolvedora = ?, genero = ?, imagem = ?, preco = ? WHERE id = ?"
+        const valores = [nome, desenvolvedora, genero, imagem, preco, id]
+
+        db.query(sql,valores,(erro, resultado)=>{
+            if(erro){
+                return res.status(500).send("Erro ao atualizar jogo")
+            }
+            res.send("Jogo atualizado com sucesso")
+        })
+    }else{
+        res.status(400).send("Erro: Preencha todos os campos")
+    }
+}
+//Delete Discos
+const deletarJogo = (req, res)=>{
+    const{id}=req.params
+    const sql="DELETE FROM jogos WHERE id = ?"
+
+    db.query(sql,[id],(erro,resultado)=>{
+        if(erro){
+            return res.status(500).send("Erro ao deletar jogo")
+        }
+        res.send("Jogo deletado com sucesso")
+    })
+}
+
+
 const app = express()
 
 app.use(cors())
@@ -55,6 +86,8 @@ const porta = 3000
 
 app.get("/listar", mostrarJogos)
 app.post("/cadastrar", novoJogo)
+app.put("/atualizar/:id", atualizarJogo)
+app.delete("/deletar/:id", deletarJogo)
 
 app.listen(porta,()=>{
     console.log(`Servidor rodando porta ${porta}`)
